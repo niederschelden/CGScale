@@ -1,0 +1,22 @@
+{
+  "short_name": "Vitaplus Waage",
+  "name": "Vitaplus interaktive Smartwaage",
+  "icons": [
+    {
+      "src": "/privatewaage-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/waage-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#b1b930",
+  "description": "Persönliche Waage"
+}

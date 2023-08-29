@@ -1,0 +1,46 @@
+html{
+    height: 100%;
+}
+body {
+    background-color: #f3eae2;
+    position: relative;
+    height: 100%;
+    margin: 0;
+}
+
+a:link, a:visited, a:hover, a:active, .kopfzeile{
+    text-align: left;
+    background-color: #b1b930;
+    color: white;
+}
+.logozeile{
+    background-image: url("logo.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    background-color: white;
+    color: #83781d;
+    min-height: 100px;
+    text-align: center;
+}
+
+#scala{
+    color: #83781d;
+    border: none;
+    font-size: 80px;
+    width: 200px;
+    text-align: center;
+}
+#steuerung{
+    border: 1px solid white;
+}
+.fusszeile{
+    background-color: #4a433d;
+    color: #a89a7f;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.inhalt{
+    color: #5e5e5e;
+}

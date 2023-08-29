@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCScale</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <script src="main.js"></script>
+   
+</head>
+<body>
+    <div class="kopfzeile"><a href="tara.html">Tara</a> :: <input type="checkbox" id="steuerung" />Aufzeichnen :: <a href="off.html">Aus</a></div>
+    <div class="logozeile">
+        <input type="text" id="scala" size="10" />
+    </div>
+    
+    <div class="inhalt" id="inhalt" style="border: 0px none #666;" >
+        <div style="position: relative;">
+            <canvas id="scaleLayout" width="100" height="100" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+            <canvas id="lineOutput" width="100" height="100" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+            <canvas id="punktOutput" width="100" height="100" style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+        </div>
+            <script>
+                //Es wurde oben ein Canvas mit beliebiger groesse gezeichnet. 
+                //Jetzt passe ich ihn den canvas auf den Bildschirm an.
+                //Todo: Dynamische anpassung bein drehen des Handy/Tablet
+                var layoutScreen = document.getElementById('scaleLayout');
+                var lineScreen = document.getElementById('lineOutput');
+                var punktScreen = document.getElementById('punktOutput');
+                var breite = document.getElementById('inhalt').offsetWidth;
+                var hoehe = breite / 3;
+                var xmitte = breite / 2;
+                var ymitte = hoehe / 2; 
+                if(lineScreen.getContext)
+                {
+                    var ctw = layoutScreen.getContext('2d');
+                    var ctx = lineScreen.getContext('2d');
+                    var cty = punktScreen.getContext('2d');
+                    layoutScreen.width = breite;
+                    layoutScreen.height = hoehe;
+                    lineScreen.width = breite;
+                    lineScreen.height = hoehe;
+                    punktScreen.width = breite;
+                    punktScreen.height = hoehe;
+                }
+                ctw.beginPath();
+                ctw.lineWidth = 2;
+                ctw.strokeStyle = '#b1b930';
+                ctw.moveTo(0,ymitte);
+                ctw.lineTo(breite,ymitte);
+                ctw.moveTo(xmitte,0);
+                ctw.lineTo(xmitte,hoehe);
+                ctw.moveTo(xmitte,0);
+                ctw.stroke();
+                //Globale Variablen festlegen
+                var yalt, xalt, xcoord, ycoord, gewicht, output = false, debug = false, i=0; 
+                //steuerung
+                document.getElementById('steuerung').onclick = anzeigeArt;
+                //todo: am ende der Messung csv Datei zurückgeben
+
+                const myInterval = setInterval(function() { 
+                    i++;
+                    // wiederholt ausfuehren 
+                        readJson().then(messwerte => {
+                            processMesswerte(messwerte);
+                            punktZeichnen();
+                            if (output == true && 0 < gewicht) pfadZeichnen();
+                            document.getElementById("scala").value = Math.round(gewicht * 10) / 10;
+                        });
+                    //if (wasauchimmer) clearInterval(myInterval);
+                    }, 50);
+                </script>
+    </div>
+    <div class="fusszeile">BlaBlaBla Footer Bla</div>
+</body>
+</html>
